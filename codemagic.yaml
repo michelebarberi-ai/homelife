@@ -1,0 +1,55 @@
+workflows:
+  ios-testflight:
+    name: HomeLife - TestFlight
+    max_build_duration: 120
+
+    integrations:
+      app_store_connect: Homelife-AppStore
+
+    environment:
+      ios_signing:
+        provisioning_profiles:
+          - homelife_appstore_profile
+        certificates:
+          - smartbetai
+
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+
+      vars:
+        BUNDLE_ID: "com.michelebarberi.homelife"
+        APP_VERSION: "0.7.1"
+
+    scripts:
+      - name: Flutter packages
+        script: |
+          flutter pub get
+
+      - name: Install CocoaPods
+        script: |
+          find ios -name "Podfile" -execdir pod install \;
+
+      - name: Flutter analyze
+        script: |
+          flutter analyze
+
+      - name: Set up iOS code signing
+        script: |
+          xcode-project use-profiles
+
+      - name: Build signed IPA
+        script: |
+          flutter build ipa --release \
+            --build-name="$APP_VERSION" \
+            --build-number="$PROJECT_BUILD_NUMBER" \
+            --export-options-plist=/Users/builder/export_options.plist
+
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - build/ios/archive/*.xcarchive
+
+    publishing:
+      app_store_connect:
+        auth: integration
