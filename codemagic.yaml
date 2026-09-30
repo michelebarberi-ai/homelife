@@ -4,7 +4,7 @@ workflows:
     max_build_duration: 120
 
     integrations:
-      app_store_connect: Homelife-AppStore
+      app_store_connect: HomeLife-AppStore
 
     environment:
       ios_signing:
