@@ -1,0 +1,40 @@
+# Flutter / Dart
+.dart_tool/
+.packages
+.pub/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Xcode
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/ephemeral/
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh
+DerivedData/
+*.xcuserstate
+xcuserdata/
+
+# Secrets / signing
+.env
+.env.*
+*.p8
+*.p12
+*.cer
+*.mobileprovision
+AuthKey_*.p8
+
+# Local backups/scripts
+*.before_testflight
